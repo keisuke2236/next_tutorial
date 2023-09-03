@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -11,7 +12,8 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next2.js!</a>
+          Read <Link href="/posts/first-post">this page!</Link>
+          <img src="images/profile.jpg" alt="Vercel" className={styles.logo} />
         </h1>
 
         <p className={styles.description}>
