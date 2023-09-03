@@ -7,10 +7,7 @@ export default function FirstPost() {
   return (
     <Layout>
       <Head><title>First Post</title></Head>
-      <Script src="https://connect.facebook.net/en_US/sdk.js" strategy="lazyOnload" onLoad={() => console.log(`Facebook SDKが読み込まれました`)} />
-
       <h1>First Post</h1>
-      <h2><Link href="/">Back to home</Link></h2>
     </Layout>
   );
 }
