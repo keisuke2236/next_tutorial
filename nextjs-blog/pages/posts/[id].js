@@ -47,3 +47,6 @@ export async function getStaticProps({ params }) {
 }
 
 // note: async で取得したデータの読み込みが終わると、自動的に return props と指定することで default function の引数に渡されて再レンダリングされる。
+
+// getAllPostIds や getStaticProps は実はサーバサイドで実行されているので、APIをあえて利用する必要はあまりない？
+// これらのメソッドのjsはフロントエンドに配信されることはなく、DBへのアクセスコードなどを記載しても全く問題がない。
