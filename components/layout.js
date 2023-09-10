@@ -4,17 +4,17 @@ import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
-const name = 'TOPへ戻る';
+const name = 'return TOP';
 const siteName = 'Qiita Articles from Next.js';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'ろれんすさんのQiita記事 Next.js';
 
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Learn how to build a personal website using Next.js" />
-        <meta property="og:image" content={`https://og-image.vercel.app/${encodeURI(siteTitle,)}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}/>
+        <meta name="description" content="Next.jsを用いてQiitaの記事を表示するよ" />
+        <meta property="og:image" content="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/69647/24835c6d-a9b6-7d6d-9a85-d4ea9988b1b5.png" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
