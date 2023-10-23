@@ -35,7 +35,6 @@ export function getSortedPostsData() {
   });
 }
 
-
 // 特定ディレクトリの内容を map 形式で返している
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
