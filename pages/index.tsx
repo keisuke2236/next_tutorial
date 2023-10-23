@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
@@ -10,7 +11,7 @@ import Date from '../components/date';
 // export async function getStaticProps(context) { }
 
 // リクエスト毎にデータをロード
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -19,8 +20,16 @@ export async function getStaticProps(context) {
   };
 }
 
+type Props = {
+  allPostsData: {
+    id: string;
+    title: string;
+    date: string;
+  }[];
+}
+
 // 引数は props のグローバル変数を参照するので、利用したい変数を直接利用できる。
-export default function Home({allPostsData}) {
+export default function Home({ allPostsData }: Props) {
   return (
     <Layout home>
       <Head>
