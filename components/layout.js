@@ -26,13 +26,11 @@ export default function Layout({ children, home }) {
           </>
         ) : (
           <>
-          <Link href="/">
-            <a>
-              <Image priority src="/images/profile.jpg" className={utilStyles.borderCircle} height={108} width={108} alt="" />
-            </a>
-          </Link>
+              <Link href='/'>
+                <Image priority src="/images/profile.jpg" className={utilStyles.borderCircle} height={108} width={108} alt="" />
+              </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
+                <Link href='/' className={utilStyles.colorInherit}>
                 {name}
               </Link>
             </h2>
@@ -42,7 +40,7 @@ export default function Layout({ children, home }) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href="/">← TOPへ戻る</Link>
+          <Link href='/'>← TOPへ戻る</Link>
         </div>
       )}
     </div>
