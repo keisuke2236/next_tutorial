@@ -1,29 +1,26 @@
-import { GetStaticProps } from 'next';
-import { BlogPostsProps } from '../types/BlogPostsProps';
-import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
+import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
+
 import Link from 'next/link';
 import Date from '../components/date';
 import Tags from '../components/Tags';
 
+import { GetStaticProps } from 'next';
+import { ArticleListProps  } from '../types/ArticleListProps';
+import { ArticleProps } from '../types/ArticleProps';
 
-// 非同期でデータをローカルのファイル参照で取得（ビルド時に実行）
-// export async function getStaticProps(context) { }
-
-// リクエスト毎にデータをロード
 export const getStaticProps: GetStaticProps = async (context) => {
-  const allPostsData = getSortedPostsData();
+  const allData = getSortedPostsData();
   return {
     props: {
-      allPostsData,
+      articleList: allData.articleList,
     },
   };
 }
 
-// 引数は BlogPostsProps のグローバル変数を参照するので、利用したい変数を直接利用できる。
-export default function Home({ allPostsData }: BlogPostsProps) {
+export default function Home({ articleList }: ArticleListProps) {
   return (
     <Layout home>
       <Head>
@@ -32,13 +29,13 @@ export default function Home({ allPostsData }: BlogPostsProps) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>記事一覧</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title, tags, author }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
+          {articleList.map((article: ArticleProps) => (
+            <li className={utilStyles.listItem} key={article.id}>
+              <Link href={`/posts/${article.id}`}>{article.title}</Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} /> by {author}
-                <Tags tags={tags} />
+                <Date dateString={article.date} /> by {article.author}
+                <Tags tags={article.tags} />
               </small>
             </li>
           ))}
