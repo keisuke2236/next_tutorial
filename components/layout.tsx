@@ -8,7 +8,15 @@ const name = 'return TOP';
 const siteName = 'Qiita Articles from Next.js';
 export const siteTitle = 'ろれんすさんのQiita記事 Next.js';
 
-export default function Layout({ children, home }) {
+// ReactNode は <> HTMLタグ </> で囲まれたものを指す、ものすごく柔軟な型
+import { ReactNode } from 'react';
+
+interface LayoutProps {
+  children: ReactNode;
+  home?: boolean;
+}
+
+export default function Layout({ children, home }: LayoutProps) {
   return (
     <div className={styles.container}>
       <Head>
