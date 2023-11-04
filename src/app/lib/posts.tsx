@@ -57,19 +57,18 @@ export function getAllPostIds() {
 }
 
 // 受け取ったIDに基づいて、posts/以下のデータを見て読み込んで取得する関数
-export async function getPostData(id: string) {
+export function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
 
   // html を SSR
-  const processedContent = await remark()
+  const processedContent = remark()
     .use(html)
-    .process(matterResult.content);
+    .processSync(matterResult.content);
   const contentHtml = processedContent.toString();
 
-  // Combine the data with the id and contentHtml
   return {
     id,
     contentHtml,

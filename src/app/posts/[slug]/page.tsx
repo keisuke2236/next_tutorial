@@ -1,23 +1,29 @@
+// Metaデータなど
+import Head from 'next/head';
+// CSSデザインファイル
+import utilStyles from '../../styles/utils.module.css';
+// 作成ライブラリから利用する関数のみをimport (これは利用可能なAPIデータ取得系のHelper)
+import { getAllPostIds, getPostData } from '../../lib/posts';
+// 自作のコンポーネント（コンポーネントはUIパーツの事でDecoratorの様なもの）
+import Date from '../../components/date';
+
+
 export default function Article({ params }: { params: { slug: string } }) {
+  const postData = getPostData(params.slug);
+  console.log(postData);
   return (
-    <div>
-      <h1>記事の詳細</h1>
-      <p>記事のスラッグ: {params.slug}</p>
-    </div>
+    <>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>投稿日：<Date dateString={postData.date} /></div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
+    </>
   );
 }
-
-
-
-// // Metaデータなど
-// import Head from 'next/head';
-// // CSSデザインファイル
-// import Layout from '../../components/layout';
-// import utilStyles from '/styles/utils.module.css';
-// // 作成ライブラリから利用する関数のみをimport (これは利用可能なAPIデータ取得系のHelper)
-// import { getAllPostIds, getPostData } from '../../lib/posts';
-// // 自作のコンポーネント（コンポーネントはUIパーツの事でDecoratorの様なもの）
-// import Date from '../../components/date';
 
 // // Step1: ここから実行されていく。
 // export default function Post({ postData }) {
