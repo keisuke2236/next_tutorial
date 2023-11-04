@@ -11,12 +11,11 @@ import { ArticleProps } from './types/ArticleProps';
 
 export default function Home() {
   const response = getSortedPostsData();
-  console.log(response.articleList)
   const articleList = response.articleList
   return (
     <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>サイトタイトル</title>
       </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>記事一覧</h2>
