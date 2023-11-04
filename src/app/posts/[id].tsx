@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Layout from '../components/layout';
 import utilStyles from '/styles/utils.module.css';
 // 作成ライブラリから利用する関数のみをimport (これは利用可能なAPIデータ取得系のHelper)
-import { getAllPostIds, getPostData } from '../../../lib/posts';
+import { getAllPostIds, getPostData } from '../lib/posts';
 // 自作のコンポーネント（コンポーネントはUIパーツの事でDecoratorの様なもの）
 import Date from '../components/date';
 
