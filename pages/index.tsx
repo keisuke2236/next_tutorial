@@ -1,11 +1,11 @@
-import Layout, { siteTitle } from '../components/layout';
+import Layout, { siteTitle } from '../src/app/components/layout';
 import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 
 import Link from 'next/link';
-import Date from '../components/date';
-import Tags from '../components/Tags';
+import Date from '../src/app/components/date';
+import Tags from '../src/app/components/Tags';
 
 import { GetStaticProps } from 'next';
 import { ArticleListProps  } from '../types/ArticleListProps';
