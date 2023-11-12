@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import utilStyles from './styles/utils.module.css';
+import utilStyles from './styles/utils.module.scss';
 import { getSortedPostsData } from './lib/posts';
 
 import Link from 'next/link';
