@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './components/layout.module.css';
-import utilStyles from './styles/utils.module.css';
+import styles from './components/layout.module.scss';
+import utilStyles from './styles/utils.module.scss';
 import Link from 'next/link';
 
 const name = 'return TOP';
