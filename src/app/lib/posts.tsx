@@ -11,39 +11,6 @@ import { ArticleProps } from '../types/ArticleProps';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-function convertToArticle(article: ArticleProps): ArticleProps {
-  return {
-    id: article.id,
-    title: article.title,
-    date: article.date,
-    tags: article.tags,
-    author: article.author,
-    slide: article.slide,
-  };
-}
-
-export function getSortedPostsData(): ArticleListProps {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const articleList = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, "");
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContents);
-    return {
-      id,
-      ...matterResult.data,
-    } as ArticleProps;
-  });
-
-  const sortedPostsData: ArticleListProps = {
-    articleList: articleList
-      .map((article) => convertToArticle(article))
-      .sort((a, b) => (a.date < b.date ? 1 : -1)),
-  };
-
-  return sortedPostsData;
-}
-
 // 特定ディレクトリの内容を map 形式で返している
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -56,26 +23,37 @@ export function getAllPostIds() {
   });
 }
 
-// 受け取ったIDに基づいて、posts/以下のデータを見て読み込んで取得する関数
+// 記事データ（一覧）取得
+export function getSortedPostsData(): ArticleListProps {
+  const fileNames = fs.readdirSync(postsDirectory);
+  const articles = fileNames.map(parseMarkdownFile);
+
+  const sortedPostsData: ArticleListProps = {
+    articles: articles.sort((a, b) => (a.date < b.date ? 1 : -1)),
+  };
+
+  return sortedPostsData;
+}
+
+// 記事データ（単体）の取得
 export function getPostData(id: string): ArticleProps {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  return parseMarkdownFile(`${id}.md`);
+}
 
-  const matterResult = matter(fileContents);
-
-  // html を SSR
-  const processedContent = remark()
-    .use(html)
-    .processSync(matterResult.content);
-  const contentHtml = processedContent.toString();
+// マークダウンファイルのパース
+function parseMarkdownFile(fileName) {
+  const filePath = path.join(postsDirectory, fileName);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const article = matter(fileContents);
+  const contentHtml = remark().use(html).processSync(article.content).toString();
 
   return {
-    id: id,
+    id: fileName.replace(/\.md$/, ''),
     contentHtml: contentHtml,
-    title: matterResult.data.title,
-    date: matterResult.data.date,
-    tags: matterResult.data.tags,
-    author: matterResult.data.author,
-    slide: matterResult.data.slide,
+    title: article.data.title,
+    date: article.data.date,
+    tags: article.data.tags,
+    author: article.data.author,
+    slide: article.data.slide,
   };
 }
