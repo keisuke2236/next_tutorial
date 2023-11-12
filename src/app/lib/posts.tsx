@@ -25,7 +25,6 @@ export function getAllPostIds() {
 
 // 記事データ（一覧）取得
 export function getSortedPostsData(): ArticleListProps {
-  console.log('getSortedPostsData');
   const fileNames = fs.readdirSync(postsDirectory);
   const articles = fileNames.map(parseMarkdownFile);
 
