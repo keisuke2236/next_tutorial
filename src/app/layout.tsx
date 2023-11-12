@@ -34,11 +34,11 @@ export default function Layout({ children, home }: LayoutProps) {
           </>
         ) : (
           <>
-              <Link href='/'>
-                <Image priority src='/images/profile.jpg' className={utilStyles.borderCircle} height={108} width={108} alt='' />
-              </Link>
+            <Link href='/'>
+              <Image priority src='/images/profile.jpg' className={utilStyles.borderCircle} height={108} width={108} alt='' />
+            </Link>
             <h2 className={utilStyles.headingLg}>
-                <Link href='/' className={utilStyles.colorInherit}>{name}</Link>
+              <Link href='/' className={utilStyles.colorInherit}>{name}</Link>
             </h2>
           </>
         )}

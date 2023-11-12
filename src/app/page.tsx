@@ -10,8 +10,7 @@ import { ArticleListProps  } from './types/ArticleListProps';
 import { ArticleProps } from './types/ArticleProps';
 
 export default function Home() {
-  const response = getSortedPostsData();
-  const articleList = response.articleList
+  const articleList: ArticleListProps = getSortedPostsData();
   return (
     <>
       <Head>
@@ -20,7 +19,7 @@ export default function Home() {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>記事一覧</h2>
         <ul className={utilStyles.list}>
-          {articleList.map((article: ArticleProps) => (
+          {articleList.articles.map((article: ArticleProps) => (
             <li className={utilStyles.listItem} key={article.id}>
               <Link href={`/posts/${article.id}`}>{article.title}</Link>
               <br />
