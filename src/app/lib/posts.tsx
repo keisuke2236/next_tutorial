@@ -19,6 +19,7 @@ function convertToArticle(article: ArticleProps): ArticleProps {
     tags: article.tags,
     author: article.author,
     slide: article.slide,
+    contentHtml: article.contentHtml,
   };
 }
 
