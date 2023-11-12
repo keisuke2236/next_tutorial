@@ -1,30 +1,21 @@
-import Layout, { siteTitle } from '../components/layout';
 import Head from 'next/head';
-import utilStyles from '../styles/utils.module.css';
-import { getSortedPostsData } from '../lib/posts';
+import utilStyles from './styles/utils.module.css';
+import { getSortedPostsData } from './lib/posts';
 
 import Link from 'next/link';
-import Date from '../components/date';
-import Tags from '../components/Tags';
+import Date from './components/date';
+import Tags from './components/Tags';
 
-import { GetStaticProps } from 'next';
-import { ArticleListProps  } from '../types/ArticleListProps';
-import { ArticleProps } from '../types/ArticleProps';
+import { ArticleListProps  } from './types/ArticleListProps';
+import { ArticleProps } from './types/ArticleProps';
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const allData = getSortedPostsData();
-  return {
-    props: {
-      articleList: allData.articleList,
-    },
-  };
-}
-
-export default function Home({ articleList }: ArticleListProps) {
+export default function Home() {
+  const response = getSortedPostsData();
+  const articleList = response.articleList
   return (
-    <Layout home>
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>サイトタイトル</title>
       </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>記事一覧</h2>
@@ -41,6 +32,6 @@ export default function Home({ articleList }: ArticleListProps) {
           ))}
         </ul>
       </section>
-    </Layout>
+    </>
   );
 }

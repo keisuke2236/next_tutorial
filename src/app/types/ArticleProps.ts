@@ -5,4 +5,5 @@ export type ArticleProps = {
   tags: string;
   author: string;
   slide?: string;
+  contentHtml: string;
 };
