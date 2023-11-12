@@ -57,7 +57,7 @@ export function getAllPostIds() {
 }
 
 // 受け取ったIDに基づいて、posts/以下のデータを見て読み込んで取得する関数
-export function getPostData(id: string) {
+export function getPostData(id: string): ArticleProps {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -70,8 +70,12 @@ export function getPostData(id: string) {
   const contentHtml = processedContent.toString();
 
   return {
-    id,
-    contentHtml,
-    ...matterResult.data,
+    id: id,
+    contentHtml: contentHtml,
+    title: matterResult.data.title,
+    date: matterResult.data.date,
+    tags: matterResult.data.tags,
+    author: matterResult.data.author,
+    slide: matterResult.data.slide,
   };
 }

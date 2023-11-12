@@ -10,7 +10,6 @@ import Date from '../../components/date';
 
 export default function Article({ params }: { params: { slug: string } }) {
   const postData = getPostData(params.slug);
-  console.log(postData);
   return (
     <>
       <Head>
