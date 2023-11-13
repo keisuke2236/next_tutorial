@@ -19,7 +19,7 @@ export default function QiitaArticles() {
     <ul className={utilStyles.list}>
       {articles.map((article) => (
         <li className={utilStyles.listItem} key={article.id}>
-          <Link href={`/posts/${article.id}`}>{article.title}</Link>
+          <Link href={`/qiita_articles/${article.id}`}>{article.title}</Link>
           <br />
           <small className={utilStyles.lightText}>
             <Date dateString={article.date} /> by {article.author}
