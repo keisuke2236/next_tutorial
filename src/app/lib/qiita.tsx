@@ -15,8 +15,11 @@ type QiitaArticle = {
 
 // Qiitaの記事データをArticleProps型に変換する関数
 function convertToArticleProps(qiitaArticle: QiitaArticle): ArticleProps {
+  const match = qiitaArticle.url.match(/items\/([a-zA-Z0-9]+)/);
+  const id = match ? match[1] : 'not-found';
+
   return {
-    id: qiitaArticle.url,
+    id: id,
     title: qiitaArticle.title,
     date: qiitaArticle.created_at,
     tags: qiitaArticle.tags.map(tag => tag.name).join(', '),
@@ -28,13 +31,24 @@ function convertToArticleProps(qiitaArticle: QiitaArticle): ArticleProps {
 
 // Qiitaの記事を取得してArticleListProps型に変換する関数
 export async function fetchQiitaArticles(): Promise<ArticleListProps> {
-  const url = 'https://qiita.com/api/v2/users/rorensu2236/items?page=1&per_page=20';
+  const url = 'https://qiita.com/api/v2/users/rorensu2236/items?page=1&per_page=30';
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error('Failed to fetch Qiita articles');
+    throw new Error('Qiitaから記事一覧を取得できませんでした。');
   }
   const qiitaArticles: QiitaArticle[] = await response.json();
   return {
     articles: qiitaArticles.map(convertToArticleProps)
   };
+}
+
+// Qiitaの記事を取得してArticleProps型に変換する関数
+export async function fetchQiitaArticle(id: string): Promise<ArticleProps> {
+  const url = `https://qiita.com/api/v2/items/${id}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Qiitaから記事データを取得できませんでした。');
+  }
+  const qiitaArticle: QiitaArticle = await response.json();
+  return convertToArticleProps(qiitaArticle);
 }
