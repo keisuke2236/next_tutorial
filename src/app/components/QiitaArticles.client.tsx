@@ -1,19 +1,25 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Date from './date';
-import Tags from './Tags';
-import utilStyles from '../styles/utils.module.scss';
-import { fetchQiitaArticles } from '../lib/qiita';
-import { ArticleProps } from '../types/ArticleProps';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Date from './date'
+import Tags from './Tags'
+import utilStyles from '../styles/utils.module.scss'
+import { fetchQiitaArticles } from '../lib/qiita'
+import { type ArticleProps } from '../types/ArticleProps'
 
-export default function QiitaArticles() {
-  const [articles, setArticles] = useState<ArticleProps[]>([]);
+export default function QiitaArticles (): JSX.Element {
+  const [articles, setArticles] = useState<ArticleProps[]>([])
 
   useEffect(() => {
-    fetchQiitaArticles().then(data => setArticles(data.articles));
-  }, []);
+    fetchQiitaArticles()
+      .then(data => {
+        setArticles(data.articles)
+      })
+      .catch(error => {
+        console.error('記事の取得に失敗しました。', error)
+      })
+  }, [])
 
   return (
     <ul className={utilStyles.list}>
@@ -28,5 +34,5 @@ export default function QiitaArticles() {
         </li>
       ))}
     </ul>
-  );
+  )
 }
