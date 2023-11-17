@@ -1,11 +1,11 @@
-import Head from 'next/head';
-import utilStyles from '../../styles/utils.module.scss';
-import Date from '../../components/date';
+import Head from 'next/head'
+import utilStyles from '../../styles/utils.module.scss'
+import Date from '../../components/date'
 
-import { getAllPostIds, getPostData } from '../../lib/posts';
+import { getPostData } from '../../lib/posts'
 
-export default function Article({ params }: { params: { slug: string } }) {
-  const postData = getPostData(params.slug);
+export default function Article ({ params }: { params: { slug: string } }): JSX.Element {
+  const postData = getPostData(params.slug)
   return (
     <>
       <Head>
@@ -17,5 +17,5 @@ export default function Article({ params }: { params: { slug: string } }) {
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </>
-  );
+  )
 }

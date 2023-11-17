@@ -1,21 +1,21 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from './components/layout.module.scss';
-import utilStyles from './styles/utils.module.scss';
-import Link from 'next/link';
-
-const siteName = 'Qiita Articles from Next.js';
-export const siteTitle = 'ろれんすさんのQiita記事 Next.js';
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from './components/layout.module.scss'
+import utilStyles from './styles/utils.module.scss'
+import Link from 'next/link'
 
 // ReactNode は <> HTMLタグ </> で囲まれたものを指す、ものすごく柔軟な型
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react'
+
+const siteName = 'Qiita Articles from Next.js'
+export const siteTitle = 'ろれんすさんのQiita記事 Next.js'
 
 interface LayoutProps {
-  children: ReactNode;
-  home?: boolean;
+  children: ReactNode
+  home?: boolean
 }
 
-export default function Layout({ children, home }: LayoutProps) {
+export default function Layout ({ children, home }: LayoutProps): JSX.Element {
   return (
     <html lang='ja'>
       <body>
@@ -28,12 +28,14 @@ export default function Layout({ children, home }: LayoutProps) {
             <meta name='twitter:card' content='summary_large_image' />
           </Head>
           <header className={styles.header}>
-            {home ? (
+            {home === true
+              ? (
               <>
                 <Image priority src='/images/profile.jpg' className={utilStyles.borderCircle} height={144} width={144} alt='' />
                 <h1 className={utilStyles.heading2Xl}>{siteName}</h1>
               </>
-            ) : (
+                )
+              : (
               <>
                 <Link href='/'>
                   <Image priority src='/images/profile.jpg' className={utilStyles.borderCircle} height={108} width={108} alt='' />
@@ -42,10 +44,10 @@ export default function Layout({ children, home }: LayoutProps) {
                   <Link href='/qiita_articles' className={utilStyles.colorInherit}>Qiita記事一覧へ戻る</Link>
                 </h2>
               </>
-            )}
+                )}
           </header>
           <main>{children}</main>
-          {!home && (
+          {home === false && (
             <div className={styles.backToHome}>
               <Link href='/'>← TOPへ戻る</Link>
             </div>
@@ -53,5 +55,5 @@ export default function Layout({ children, home }: LayoutProps) {
         </div>
       </body>
     </html>
-  );
+  )
 }

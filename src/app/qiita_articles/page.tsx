@@ -1,8 +1,8 @@
-import React from 'react';
-import Head from 'next/head';
-import QiitaArticles from '../components/QiitaArticles.client';
+import React from 'react'
+import Head from 'next/head'
+import QiitaArticles from '../components/QiitaArticles.client'
 
-export default function Home() {
+export default function Home (): JSX.Element {
   return (
     <>
       <Head>
@@ -13,5 +13,5 @@ export default function Home() {
         <QiitaArticles /> {/* Next.js 14 クライアントコンポーネントを使用 */}
       </section>
     </>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import Head from 'next/head';
-import utilStyles from './styles/utils.module.scss';
-import { getSortedPostsData } from './lib/posts';
+import Head from 'next/head'
+import utilStyles from './styles/utils.module.scss'
+import { getSortedPostsData } from './lib/posts'
 
-import Link from 'next/link';
-import Date from './components/date';
-import Tags from './components/Tags';
+import Link from 'next/link'
+import Date from './components/date'
+import Tags from './components/Tags'
 
-import { ArticleListProps  } from './types/ArticleListProps';
-import { ArticleProps } from './types/ArticleProps';
+import { type ArticleListProps } from './types/ArticleListProps'
+import { type ArticleProps } from './types/ArticleProps'
 
-export default function Home() {
-  const articleList: ArticleListProps = getSortedPostsData();
+export default function Home (): JSX.Element {
+  const articleList: ArticleListProps = getSortedPostsData()
   return (
     <>
       <Head>
@@ -32,5 +32,5 @@ export default function Home() {
         </ul>
       </section>
     </>
-  );
+  )
 }
