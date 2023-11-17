@@ -3,6 +3,11 @@ module.exports = {
     browser: true,
     es2021: true
   },
+  settings: {
+    react: {
+      version: 'detect' // 自動的にプロジェクトのReactバージョンを検出して Lintルールを適用
+    }
+  },
   extends: [
     'standard-with-typescript',
     'plugin:react/recommended'
@@ -33,5 +38,6 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off'
-  }
+  },
+  ignorePatterns: ['next.config.js']
 }
