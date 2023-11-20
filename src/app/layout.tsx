@@ -41,7 +41,7 @@ export default function Layout ({ children, home }: LayoutProps): JSX.Element {
                   <Image priority src='/images/profile.jpg' className={utilStyles.borderCircle} height={108} width={108} alt='' />
                 </Link>
                 <h2 className={utilStyles.headingLg}>
-                  <Link href='/qiita_articles' className={utilStyles.colorInherit}>Qiita記事一覧へ戻る</Link>
+                  <Link href='./' className={utilStyles.colorInherit}>一覧へ戻る</Link>
                 </h2>
               </>
                 )}
